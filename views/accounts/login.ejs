@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel='stylesheet' href='/stylesheets/login_style.css' />
+    <script src="https://kit.fontawesome.com/51db22a717.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+    <script src="/javascripts/login.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.28.2/sweetalert2.all.min.js"></script>
+</head>
+<body>
+    <div class="page-container">
+        <div class="login-form-container shadow">
+            <div class="login-form-right-side">
+                <div class="top-logo-wrap">
+                </div>
+                <h>설명</h1>
+                <p>내용</p>
+            </div>
+       
+            <div class="login-form-left-side">
+                <div class="login-top-wrap">
+                    <span>계정이 없으신가요?</span>
+                    <button class="create-account-btn shadow-light" onClick="location.href='accounts/signup'">계정 만들기</button>
+                </div>
+                <form name="loginform" action="getlogin" method="post">
+                <div class="login-input-container">
+                    <div class="login-input-wrap input-id">
+                        <i class="far fa-user"></i>
+                        <input placeholder="E-mail" type="text" name="email">
+                    </div>
+                    <div class="login-input-wrap input-password">
+                        <i class="fas fa-key"></i>
+                        <input placeholder="Password"  type="password" name="password">
+                    </div>
+                </div>
+                <div class="login-btn-wrap">
+                    <button class="login-btn">Login</button>
+                    <a href="#" >비밀번호를 잊으셨나요?</a>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

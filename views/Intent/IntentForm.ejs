@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <title>CSS</title>
+      <script>
+        var frmTag;
+        var oTbl;
+        //Row 추가
+        function insRow(btObj) {
+          if(btObj.name === "addtraining") {
+              oTbl = document.getElementById("training");
+              frmTag = "<input type=text name=addText size=70; maxlength=250;> ";
+              frmTag += "<input type=button name='removetrain' value='삭제' onClick='removeRow(this)' style='cursor:hand'>";
+          }
+          else {
+              oTbl = document.getElementById("response");
+              frmTag = "<textarea name='irespones' rows='5' cols='60'></textarea>";
+              frmTag += "<input type=button name='removeres' value='삭제' onClick='removeRow(this)' style='cursor:hand'>";
+          }
+          var oRow = oTbl.insertRow();
+          oRow.onmouseover=function(){oTbl.clickedRowIndex=this.rowIndex}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
+          var oCell = oRow.insertCell();
+          oCell.innerHTML = frmTag;
+        }
+        //Row 삭제
+        function removeRow(btObj) {
+          if(btObj.name === "removeres"){
+              oTbl = document.getElementById("response");
+          }
+          else oTbl = document.getElementById("training");
+          oTbl.deleteRow(oTbl.clickedRowIndex);
+        }
+
+        </script>
+    <style>
+
+      th, td {
+        padding: 10px;
+        text-align: center;
+      }
+      th:nth-child(2n), td:nth-child(2n) {
+        background-color: #bbdefb;
+      }
+      th:nth-child(2n+1), td:nth-child(2n+1) {
+        background-color: #e3f2fd;
+      }
+    </style>
+
+  </head>
+  <body>
+    <form name="form1" action="/dialogflow/intentSave" method="post">
+    <table> <!--전체적인 큰 틀 table 헤더-->
+      <thead>
+        <tr>
+          <th>Intent Name</th><th>Training Phrases</th><th>Responses</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td>
+                <table> <!--두번째 행에 intent부분에 들어가는 테이블-->
+                    <tr>
+                        <td>
+                            <input type="text" name="iname" size="40" maxlength="20">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td><!--두번째 행에 training부분에 들어가는 테이블-->
+                <table id="training">
+                    <tr>
+                        <td>
+                            <input type="text" name="itraining" size="70" maxlength="250"> <input name="addtraining" type="button" style="cursor:hand" onClick="insRow(this)" value="추가">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table id="response">
+                    <tr>
+                        <td>
+                            <textarea name="irespones" rows="5" cols="60"></textarea> <input name="addresponse" type="button" style="cursor:hand" onClick="insRow(this)" value="추가">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+    <a href="#" onclick="form1.submit()">저장</a>
+    <!-- <input type="hidden" name="brdno" value="<%=row.brdno%>" -->
+    <input type="hidden" name="cdate" value="<%=row.cdate%>">
+    <input type="hidden" name="iuuid" value="<%=row.iuuid%>">
+  </form>
+  </body>
+</html>

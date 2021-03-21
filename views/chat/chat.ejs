@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel='stylesheet' href='/stylesheets/login_style.css' />
+    <link rel='stylesheet' href='/stylesheets/chat_style.css' />
+    <script src="https://kit.fontawesome.com/51db22a717.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.2.1.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/dateformat@3.0.3/lib/dateformat.js"></script>
+    <script src="/javascripts/chat.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+ 
+</head>
+
+<body>
+
+    <div class="chat_wrap">
+      
+
+        <div class="header">
+            <nav class="nav">
+                <input type="checkbox" class="nav__cb" id="menu-cb"/>
+                <div class="nav__content">
+                  <ul class="nav__items">
+                    <li class="nav__item">
+                      <span class="nav__item-text">
+                        <a href="#" onclick="window.open('test', '_blank', 'width=600 height=600')">
+                        Test
+                      </a>
+                      </span>
+                    </li>
+                    <li class="nav__item">
+                      <span class="nav__item-text">
+		<a href="chart">
+                    Chart
+		</a>
+                      </span>
+                    </li>
+                    <li class="nav__item">
+                      <span class="nav__item-text">
+                        <a href="#" onclick="window.open('time', '_blank', 'width=350 height=270')">
+                        Time
+                      </a>
+                      </span>
+                    </li>
+                    <li class="nav__item">
+                      <span class="nav__item-text">
+                        <a href="IntentList">
+                      Intent
+                    </a>
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+                <label class="nav__btn" for="menu-cb"></label>
+              </nav>
+        </div>
+        <div class="chat">
+            <ul>
+                <!-- 동적 생성 -->
+            </ul>
+        </div>
+        <div class="input-div">
+            <textarea placeholder="Press Enter for send message."></textarea>
+        </div>
+
+        <!-- format -->
+
+        <div class="chat format">
+            <ul>
+                <li>
+                    <div class="sender">
+                        <span></span>
+                    </div>
+                    <div class="message">
+                        <span></span>
+                    </div>
+                    <div class="nowdate">
+                        <span></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>sapmle</title>
+</head>
+<body>
+		<table border="1" style="width:600px">
+			<caption>sample</caption>
+			<colgroup>
+				<col width='15%' />
+				<col width='*%' />
+			</colgroup>
+			<tbody>
+				<tr>
+					<td>이름</td> 
+					<td><%=row.iname%></td> 
+				</tr>
+				<tr>
+					<td>TP</td> 
+					<td><%=row.iname%></td> 
+				</tr>
+				<tr>
+					<td>RES</td> 
+					<td><%=row.iname%></td> 
+				</tr>
+				<tr>
+					<td>날짜</td> 
+					<td><%=row.cdate%></td> 
+				</tr>
+			</tbody>
+		</table>    
+		<input type="hidden" name="iuuid" value="<%=row.iuuid%>">
+		<a href="#" onclick="history.back(-1)">List</a>
+		 <a href="IntentDelete?iuuid=<%=row.iuuid%>">Delete</a>
+		<a href="boardForm?brdno=<%=row.brdno%>">Modify</a>
+</body>
+</html>

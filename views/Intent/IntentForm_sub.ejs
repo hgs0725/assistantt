@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>sample</title>
+</head>
+ 
+    <form name="form1" action="/dialogflow/intentSave" method="post">
+        <table border="1" style="width:600px">
+            <caption>sample</caption>
+            <colgroup>
+                <col width='15%' />
+                <col width='*%' />
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td>Intent Name</td>
+                    <td><input type="text" name="iname" size="20" maxlength="20" value="<%=row.iname%>"></td>
+                </tr>
+                <tr>
+                    <td>Training Phrases</td>
+                    <td><input type="text" name="itraining" size="70" maxlength="250" value="<%=row.itraining%>"></td>
+                </tr>
+                <tr>
+                    <td>Respones</td>
+                    <td><textarea name="irespones" rows="5" cols="60"><%=row.irespones%></textarea></td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="#" onclick="form1.submit()">저장</a>
+        <!-- <input type="hidden" name="brdno" value="<%=row.brdno%>" -->
+        <input type="hidden" name="cdate" value="<%=row.cdate%>">
+    </form>  
+</body>
+</html>
+
+
