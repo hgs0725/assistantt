@@ -136,7 +136,8 @@ function main(
   displayName,
   trainingPhrasesParts,
   messageTexts,
-  postData
+  postData,
+  collectionName
 ) {
   // [START dialogflow_create_intent]
 
@@ -203,7 +204,7 @@ function main(
     var iuuid = intentuuid.split('/');
     postData.iuuid = iuuid[4];
 
-    var doc = db.collection("intent").doc(postData.iuuid);
+    var doc = db.collection(collectionName).doc(postData.iuuid);
 
 
   
@@ -256,16 +257,60 @@ router.post('/intentSave', function (req, res, next) {
     postData.cdate = Date.now();
 
 
-    main('fbtest-cagf', postData.iname, itp, imsgt, postData);
+    main('fbtest-cagf', postData.iname, itp, imsgt, postData, "intent");
 
 
   } else {                // update
 
-    main('fbtest-cagf', postData.iname, itp, imsgt, postData);
+    main('fbtest-cagf', postData.iname, itp, imsgt, postData, "intent");
 
   }
 
   res.redirect('../IntentList');
+});
+
+router.post('/intentSaveClass', function (req, res, next) {
+  var postData = req.body;
+  let itp = [];
+  let imsgt = [];
+
+  let addtext = (postData.addText);
+  let addres = (postData.irespones);
+
+
+
+  /*
+  let saddtext = addtext.split(',');
+  let saddres = addres.split(',');
+  */
+
+  itp.push(postData.itraining);
+
+  for (let i in addtext) {
+    itp.push(addtext[i]);
+  }
+  /*
+  for (i in addres) {
+    imsgt.push(addres[i]);
+  }
+  */
+
+  imsgt.push(addres);
+
+  if (!postData.brdno) {  // new
+    postData.cdate = Date.now();
+
+
+    main('fbtest-cagf', postData.iname, itp, imsgt, postData, "intentClass");
+
+
+  } else {                // update
+
+    main('fbtest-cagf', postData.iname, itp, imsgt, postData, "intentClass");
+
+  }
+
+  res.redirect('../IntentListClass');
 });
 
 

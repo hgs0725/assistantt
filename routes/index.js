@@ -93,6 +93,23 @@ router.get('/IntentList',function(req, res, next) {
       });
 });
 
+router.get('/IntentListClass',function(req, res, next) {
+    db.collection('intentClass').orderBy("cdate").get()
+        .then((snapshot) => {
+            var rows = [];
+            snapshot.forEach((doc) => {
+                var childData = doc.data();
+                childData.cdate = dateFormat(childData.cdate,"yyyy-mm-dd HH:MM");
+
+                rows.push(childData);
+            });
+            res.render('./Intent/IntentList_class', {rows: rows});
+        })
+        .catch((err) => {
+            console.log('Error getting documents', err);
+        });
+});
+
 router.get('/IntentForm',function(req,res,next){
   if (!req.query.brdno) {// new
       res.render('Intent/IntentForm', {row:""});
@@ -104,6 +121,20 @@ router.get('/IntentForm',function(req,res,next){
         .then((doc) => {
             var childData = doc.data();
             res.render('Intent/IntentForm', {row: childData});
+        })
+});
+
+router.get('/IntentFormClass',function(req,res,next){
+    if (!req.query.brdno) {// new
+        res.render('Intent/IntentForm_class', {row:""});
+        return;
+    }
+
+    // update
+    db.collection('intent').doc(req.query.brdno).get()
+        .then((doc) => {
+            var childData = doc.data();
+            res.render('Intent/IntentForm_class', {row: childData});
         })
 });
 
@@ -267,12 +298,40 @@ function check_connection(action) {
 
 router.get('/save_time/:emp_time', function(req, res, next) {
     console.log(req.params.emp_time);
-    let emp_time = req.params.emp_time.split(',');
-    var doc_ref = db.collection('emp_time').doc('emp_time2')
-    doc_ref.set({
-        "emp_time": emp_time,
-    });
-    res.send('저장되었습니다.');
+    var user = firebase.auth().currentUser;
+    var email;
+
+    if(user != null) {
+        email = user.email;
+    }
+
+    db.collection('users').doc(email).get()
+        .then((doc => {
+            var childData = doc.data();
+            var name;
+
+            name = childData.name;
+
+            let emp_time = req.params.emp_time.split(',');
+            var doc_ref = db.collection('emp_time').doc(name);
+            doc_ref.set({
+                "emp_time": emp_time,
+            });
+            console.log(name);
+            res.send('저장되었습니다.');
+        }))
+
+})
+
+router.get('/resetTime', function(req, res, next) {
+        const empTimeRef = db.collection('emp_time');
+        const snapshot = empTimeRef.get();
+        snapshot.forEach(doc => {
+            doc.delete();
+        });
+        res.send("초기화 되었습니다.");
+        res.render("./emp_result");
+
 })
 
 router.get('/emp_result', function(req, res, next){
@@ -290,15 +349,19 @@ router.get('/emp_result', function(req, res, next){
             res.render('./emp_result');
         }
         else{
+            //console.log(set_list);
             let retval = set_list[0].slice();
             let ret = set_list[0];
+            console.log(ret);
             set_list.forEach(sets => {
                 ret.forEach(times => {
                     if(sets.includes(times) === false) {
+                        console.log(ret)
                         retval.splice(retval.indexOf(times), 1);
                     }
                 })
             })
+            console.log(retval)
             retval.forEach(time => {
                 time_str = time_str + time_dict[time] + ' ';
             })

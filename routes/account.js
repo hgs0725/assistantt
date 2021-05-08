@@ -33,7 +33,8 @@ router.post('/accountSave', function (req, res, next) {
       const currentUser = {
         id: userCredential.user.uid,
         email: postData.email,
-        emailVerified: userCredential.user.emailVerified
+        emailVerified: userCredential.user.emailVerified,
+        displayName: postData.name
       }
 
       //DB 저장
